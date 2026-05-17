@@ -3,135 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>享樂動態</title>
+    <title>享樂紓壓</title>
     <style>
-        body { background-color: #050505; color: #d4af37; font-family: "Microsoft JhengHei", sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
-        .main-title { margin-top: 40px; margin-bottom: 30px; font-size: 2.8rem; font-weight: bold; text-align: center; color: #f1df99; letter-spacing: 4px; text-shadow: 0 0 15px rgba(241, 223, 153, 0.3); }
-        .menu-container { width: 95%; max-width: 500px; display: flex; flex-direction: column; gap: 18px; }
-        .menu-btn { background: linear-gradient(180deg, #181818 0%, #0d0d0d 100%); border: 1px solid #222; border-radius: 12px; padding: 22px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-left: 5px solid #ffd700; }
-        .btn-text { color: #ffffff; font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; }
-        .btn-arrow { color: #ffd700; font-size: 1rem; }
+        /* 基礎全域奢華深色調 */
+        body { 
+            background: radial-gradient(circle at center, #0c0c0c 0%, #020202 100%); 
+            color: #f1df99; 
+            font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 主標題進化：奢華漸層金流 */
+        .main-title { 
+            margin-top: 50px; 
+            margin-bottom: 5px; 
+            font-size: 3rem; 
+            font-weight: 900; 
+            text-align: center; 
+            background: linear-gradient(135deg, #ffffff 0%, #f1df99 40%, #d4af37 70%, #aa820a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 6px; 
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.25); 
+        }
+
+        /* 專屬簽名樣式 */
+        .brand-footer {
+            font-size: 0.85rem;
+            color: #7a683a;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .brand-footer span {
+            border-left: 1px solid #44371c;
+            padding-left: 6px;
+            margin-left: 4px;
+        }
+
+        /* 選單容器 */
+        .menu-container { width: 95%; max-width: 480px; display: flex; flex-direction: column; gap: 20px; }
         
-        /* 基礎彈窗樣式 */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); z-index: 1000; }
-        .modal-content { background: linear-gradient(135deg, #141414 0%, #050505 100%); border: 2px solid #ffd700; margin: 5vh auto; padding: 25px 20px; width: 90%; max-width: 420px; max-height: 85vh; overflow-y: auto; border-radius: 16px; position: relative; color: #f5ecc2; text-align: left; }
-        .close-btn { position: absolute; top: 12px; right: 20px; color: #ffd700; font-size: 28px; font-weight: bold; cursor: pointer; z-index: 1001; }
+        /* 按鈕進化：黑金屬拉絲與發光金邊 */
+        .menu-btn { 
+            background: linear-gradient(135deg, #1c1c1c 0%, #0d0d0d 100%); 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            border-radius: 14px; 
+            padding: 24px 28px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05); 
+            border-left: 6px solid #d4af37; 
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+        .btn-text { color: #ffffff; font-size: 1.35rem; font-weight: 700; letter-spacing: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .btn-arrow { color: #d4af37; font-size: 0.9rem; opacity: 0.8; }
         
-        .sub-menu-container { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-        .sub-menu-btn { background: #222; border: 1px solid #d4af37; color: #fff; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; text-align: center; cursor: pointer; }
-        .schedule-text { white-space: pre-wrap; word-break: break-all; background: #111; padding: 15px; border-radius: 8px; border-left: 3px solid #ffd700; font-size: 1.1rem; line-height: 1.6; color: #ffffff; margin-bottom: 15px; }
+        /* 奢華彈窗核心結構 */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 1000; }
+        .modal-content { 
+            background: linear-gradient(145deg, #161616 0%, #080808 100%); 
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            outline: 4px solid rgba(212, 175, 55, 0.05);
+            margin: 5vh auto; 
+            padding: 30px 16px; 
+            width: 95%; 
+            max-width: 470px; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            border-radius: 20px; 
+            position: relative; 
+            color: #f5ecc2; 
+            text-align: left; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 40px rgba(212, 175, 55, 0.05);
+        }
+        .close-btn { position: absolute; top: 15px; right: 22px; color: #d4af37; font-size: 32px; font-weight: 300; cursor: pointer; z-index: 1001; }
         
-        /* 核心修改：智慧型多排網格 (手機3排，大螢幕4排) */
-        .schedule-image-container { 
+        /* 彈窗子分頁與卡片樣式 */
+        .modal-title-header { text-align: center; color: #ffffff; font-size: 1.4rem; font-weight: 700; margin-top: 0; margin-bottom: 25px; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.15); padding-bottom: 15px; }
+        .sub-menu-container { display: flex; flex-direction: column; gap: 14px; margin-top: 5px; }
+        .sub-menu-btn { 
+            background: linear-gradient(180deg, #222 0%, #161616 100%); 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            color: #fff; 
+            padding: 16px; 
+            font-size: 1.15rem; 
+            font-weight: 700; 
+            border-radius: 10px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.2s;
+        }
+        .sub-menu-btn:hover { background: #d4af37; color: #000; font-weight: 800; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        
+        .schedule-text { white-space: pre-wrap; word-break: break-all; background: #0d0d0d; padding: 18px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.15); border-left: 4px solid #d4af37; font-size: 1.1rem; line-height: 1.6; color: #ffffff; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        
+        /* 聯繫窗口專屬卡片 */
+        .contact-card { background: #0a0a0a; border: 1px dashed rgba(212, 175, 55, 0.4); padding: 25px 20px; border-radius: 14px; text-align: center; display: flex; flex-direction: column; gap: 18px; align-items: center; }
+        .contact-id { font-size: 1.7rem; color: #ffffff; font-weight: 800; letter-spacing: 2px; background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.02) 100%); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(212,175,55,0.4); }
+        .contact-action-btn { display: inline-block; width: 90%; background: linear-gradient(180deg, #f1df99 0%, #d4af37 50%, #aa820a 100%); color: #000000; text-decoration: none; font-size: 1.3rem; font-weight: 800; padding: 15px 0; border-radius: 30px; box-shadow: 0 6px 20px rgba(212,175,55,0.4); text-align: center; letter-spacing: 2px; }
+
+        /* 終極優化：密集型多排網格（手機版直接呈現 3~4 排，放得更多、更好看） */
+        .multi-column-grid { 
             width: 100%; 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); /* 預設手機版 3 排 */
-            gap: 8px;                             /* 照片間距稍微縮小，更精緻 */
-            margin-top: 15px; 
+            grid-template-columns: repeat(3, 1fr); /* 預設手機版 3 排，如果你想要更小更多排，可以改成 repeat(4, 1fr) */
+            gap: 6px; 
+            margin-top: 15px;
         }
-        @media (min-width: 768px) {
-            .schedule-image-container {
-                grid-template-columns: repeat(4, 1fr); /* 電腦或平板自動變 4 排 */
-            }
+        @media (min-width: 400px) {
+            .multi-column-grid { grid-template-columns: repeat(4, 1fr); } /* 螢幕稍大自動變精緻 4 排 */
         }
         
+        /* 照片外框：固定正方形區域，保持排列絕對整齊 */
+        .img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* 框框維持完美的 1:1 */
+            cursor: pointer;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background-color: #080808; /* 背景全黑襯托 */
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .img-wrapper:hover { 
+            transform: scale(1.05); 
+            border-color: rgba(212, 175, 55, 0.7); 
+            z-index: 5;
+        }
+        
+        /* 照片本體：關鍵！用 contain 確保在多排小圖中也「絕對完整、不被裁切任何一邊」 */
         .schedule-image { 
             width: 100%; 
-            height: 150px;          /* 稍微縮短高度，正方形感更好看 */
-            object-fit: cover;      /* 自動裁切不縮水變形 */
-            border-radius: 6px;     /* 微圓角 */
-            border: 1px solid #D4AF37; 
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15); 
-            cursor: pointer;
-            transition: transform 0.2s; /* 滑過去的放大微動態 */
-        }
-        .schedule-image:hover {
-            transform: scale(1.05);
+            height: 100%; 
+            object-fit: contain; /* 精髓：照片完整縮小塞入，直圖、橫圖都絕不切邊 */
+            display: block; 
         }
 
-        /* 核心修改：專用照片燈箱（大彈窗） */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000; /* 層級最高，壓在所有東西上面 */
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
-        }
-        .lightbox img {
-            max-width: 95%;
-            max-height: 90vh;
-            object-fit: contain;
-            border: 2px solid #ffd700;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            animation: zoomIn 0.2s ease-out;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        /* 縮圖右下角放大提示 */
+        .zoom-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #d4af37;
+            border-radius: 3px;
+            padding: 1px 3px;
+            font-size: 0.55rem;
+            pointer-events: none;
         }
 
-        .content-wrapper { display: flex; flex-direction: column; gap: 10px; }
-        .price-time-section { background: rgba(255, 215, 0, 0.03); border: 1px solid rgba(255, 215, 0, 0.15); padding: 12px; border-radius: 8px; }
-        .highlight-gold { color: #ffd700; font-weight: bold; font-size: 1.1rem; display: inline-block; }
-        .sub-text { color: #bbb; font-size: 0.9rem; display: block; margin-top: 2px; }
-        .custom-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, #ffd700, transparent); margin: 4px 0; }
-        .mode-section { display: flex; flex-direction: column; gap: 8px; }
-        .mode-card { background: #111; border-left: 4px solid #ffd700; padding: 10px 12px; border-radius: 4px 8px 8px 4px; }
-        .mode-title { color: #ffffff; font-weight: bold; font-size: 1.05rem; margin-bottom: 2px; display: block; }
-        .service-card { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255, 215, 0, 0.3); padding: 10px 12px; border-radius: 8px; color: #ffffff; }
-        .extra-card { font-size: 0.95rem; color: #a8a8a8; text-align: center; border-top: 1px solid #222; padding-top: 8px; }
-        .extra-title { color: #ffd700; font-weight: bold; display: block; margin-bottom: 2px; }
+        /* 奢華高清大圖燈箱：點開後完美無損顯示原圖 */
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; }
+        .lightbox img { max-width: 95%; max-height: 92vh; object-fit: contain; border: 2px solid #d4af37; border-radius: 14px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: zoomIn 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        @keyframes zoomIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* 消費方式內頁編排 */
+        .content-wrapper { display: flex; flex-direction: column; gap: 12px; }
+        .price-time-section { background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(212, 175, 55, 0.25); padding: 16px; border-radius: 12px; }
+        .highlight-gold { color: #ffd700; font-weight: 800; font-size: 1.2rem; display: inline-block; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .sub-text { color: #ccc; font-size: 0.95rem; display: block; margin-top: 4px; }
+        .custom-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); margin: 8px 0; }
+        .mode-section { display: flex; flex-direction: column; gap: 10px; }
+        .mode-card { background: #0c0c0c; border-left: 4px solid #d4af37; padding: 12px 16px; border-radius: 4px 10px 10px 4px; }
+        .mode-title { color: #ffffff; font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; display: block; }
+        .service-card { background: rgba(255,255,255,0.01); border: 1px dashed rgba(212, 175, 55, 0.3); padding: 14px 16px; border-radius: 10px; color: #ffffff; font-size: 1.05rem; text-align: center; }
+        .extra-card { font-size: 0.95rem; color: #a8a8a8; text-align: center; border-top: 1px solid rgba(212,175,55,0.15); padding-top: 12px; }
+        .extra-title { color: #d4af37; font-weight: 700; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
-    <h1 class="main-title">享樂動態</h1>
+    <h1 class="main-title">享樂紓壓</h1>
+    <div class="brand-footer">SIN 製作 <span>DESIGN BY SIN</span></div>
 
     <div class="menu-container">
         <div class="menu-btn" onclick="openModal('priceModal')">
             <span class="btn-text">消費方式</span>
-            <span class="btn-arrow">▼</span>
+            <span class="btn-arrow">▶</span>
         </div>
         <div class="menu-btn" onclick="openModal('shopMenuModal')">
             <span class="btn-text">各館當日動態</span>
-            <span class="btn-arrow">▼</span>
+            <span class="btn-arrow">▶</span>
         </div>
-        <div class="menu-btn" onclick="alert('功能製作中...')">
+        <div class="menu-btn" onclick="openModal('weeklyScheduleMenuModal')">
             <span class="btn-text">本週各館報班</span>
-            <span class="btn-arrow">▼</span>
+            <span class="btn-arrow">▶</span>
         </div>
-        <div class="menu-btn" onclick="alert('功能製作中...')">
+        <div class="menu-btn" onclick="openModal('contactModal')">
             <span class="btn-text">快速聯繫窗口</span>
-            <span class="btn-arrow">▼</span>
+            <span class="btn-arrow">▶</span>
         </div>
     </div>
 
     <div id="priceModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('priceModal')">×</span>
+            <div class="modal-title-header">精選消費方式</div>
             <div class="content-wrapper">
                 <div class="price-time-section">
-                    <span class="highlight-gold">金額2900-3900起</span>
-                    <span class="sub-text">看你選到哪位美容師才知道</span>
-                    <div style="margin-top: 6px;"><span class="highlight-gold">時間60分(含沖澡)</span></div>
+                    <span class="highlight-gold">金額 2900 - 3900 起</span>
+                    <span class="sub-text">依所選擇之美容師定價為準</span>
+                    <div style="margin-top: 8px;"><span class="highlight-gold">時間 60 分 (含精緻沖澡)</span></div>
                 </div>
                 <div class="custom-hr"></div>
                 <div class="mode-section">
-                    <span class="highlight-gold" style="font-size: 1rem;">模式分為 :</span>
-                    <div class="mode-card"><span class="mode-title">1.現場挑選</span>站一排 給你挑你喜歡的!<br>(選到再消費)</div>
-                    <div class="mode-card"><span class="mode-title">2.幹部推薦</span>由幹部幫你做預約推薦<br>(預約不可更換美容師)</div>
+                    <span class="highlight-gold" style="font-size: 1.05rem; margin-bottom: 2px;">專屬挑選模式 :</span>
+                    <div class="mode-card"><span class="mode-title">1. 現場挑選</span>現場依序安排，挑選滿意再行消費。</div>
+                    <div class="mode-card"><span class="mode-title">2. 幹部推薦</span>由現場專業幹部為您量身預約推薦（預約後不可更換）。</div>
                 </div>
                 <div class="custom-hr"></div>
                 <div>
-                    <span class="highlight-gold" style="font-size: 1rem; margin-bottom: 4px;">服務內容：</span>
-                    <div class="service-card">按摩指油壓<br>卸甲＋重點手工排毒保養</div>
+                    <span class="highlight-gold" style="font-size: 1.05rem; margin-bottom: 6px;">精選服務項目：</span>
+                    <div class="service-card">專業深層指油壓按摩<br>頂級卸甲 ＋ 重點手工排毒舒壓保養</div>
                 </div>
                 <div class="custom-hr"></div>
-                <div class="extra-card"><span class="extra-title">額外課程費用請自談</span>音樂課<br>體育課</div>
+                <div class="extra-card"><span class="extra-title">進階客製化課程費用請現場洽談</span>音樂互動課程 ｜ 進階體育互動課程</div>
             </div>
         </div>
     </div>
@@ -139,15 +241,45 @@
     <div id="shopMenuModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('shopMenuModal')">×</span>
-            <h3 style="text-align: center; color: #ffd700; margin-top: 0; letter-spacing: 2px;">請選擇館別</h3>
+            <div class="modal-title-header">請選擇指定館別</div>
             <div class="sub-menu-container">
-                <div class="sub-menu-btn" onclick="fetchShopTab('1館-夏威夷', '1')">1館-夏威夷</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('2館-茶湯會', '2')">2館-茶湯會</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('3館-愛寶', '3')">3館-愛寶</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('4館-芯苑', '4')">4館-芯苑</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('5館-潘朵拉', '5')">5館-潘朵拉</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('6館-手中情', '6')">6館-手中情</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7館-樂鑽</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('1館-夏威夷', '1')">1館 - 夏威夷</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('2館-茶湯會', '2')">2館 - 茶湯會</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('3館-愛寶', '3')">3館 - 愛寶</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('4館-芯苑', '4')">4館 - 芯苑</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('5館-潘朵拉', '5')">5館 - 潘朵拉</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('6館-手中情', '6')">6館 - 手中情</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7館 - 樂鑽</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="weeklyScheduleMenuModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('weeklyScheduleMenuModal')">×</span>
+            <div class="modal-title-header">請選擇預約館別</div>
+            <div class="sub-menu-container">
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('1館-夏威夷', '1班表')">1館 - 夏威夷</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('2館-茶湯會', '2班表')">2館 - 茶湯會</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('3館-愛寶', '3班表')">3館 - 愛寶</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('4館-芯苑', '4班表')">4館 - 芯苑</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('5館-潘朵拉', '5班表')">5館 - 潘朵拉</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館 - 手中情</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('7館-樂鑽', '7班表')">7館 - 樂鑽</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('contactModal')">×</span>
+            <div class="modal-title-header">快速聯繫窗口</div>
+            <div class="contact-card">
+                <div style="color: #d4af37; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px;">官方 LINE ID</div>
+                <div class="contact-id">wa1234cc</div>
+                <div style="color: #bbbbbb; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
+                <div class="custom-hr" style="width: 100%;"></div>
+                <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點擊立刻整合連線</a>
             </div>
         </div>
     </div>
@@ -155,14 +287,14 @@
     <div id="shopDetailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('shopDetailModal')">×</span>
-            <h3 id="dynamicShopTitle" style="text-align: center; color: #ffd700; margin-top: 0;">館別名稱</h3>
-            <div id="dynamicSchedule" class="schedule-text">正在即時讀取分頁資料...</div>
-            <div id="dynamicImageArea" class="schedule-image-container"></div>
+            <div id="dynamicShopTitle" class="modal-title-header">館別名稱</div>
+            <div id="dynamicSchedule" class="schedule-text">正在即時讀取加密分頁資料...</div>
+            <div id="dynamicImageArea" class="multi-column-grid"></div>
         </div>
     </div>
 
     <div id="photoLightbox" class="lightbox" onclick="closeLightbox()">
-        <img id="lightboxImg" src="" alt="放大照片">
+        <img id="lightboxImg" src="" alt="原圖無損放大">
     </div>
 
     <script>
@@ -172,7 +304,6 @@
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
-        /* 放大照片的控制功能 */
         function openLightbox(src) {
             document.getElementById('lightboxImg').src = src;
             document.getElementById('photoLightbox').style.display = "flex";
@@ -181,12 +312,17 @@
             document.getElementById('photoLightbox').style.display = "none";
         }
 
+        /* 1. 當日動態 (多排精緻網格) */
         function fetchShopTab(tabName, folderNum) {
             closeModal('shopMenuModal'); 
             githubFolderNumber = folderNum; 
             document.getElementById('dynamicShopTitle').innerText = tabName; 
-            document.getElementById('dynamicSchedule').innerText = "正在即時連線抓取【" + tabName + "】分頁...";
-            document.getElementById('dynamicImageArea').innerHTML = "";
+            
+            const imgArea = document.getElementById('dynamicImageArea');
+            imgArea.innerHTML = "";
+            
+            document.getElementById('dynamicSchedule').style.display = "block";
+            document.getElementById('dynamicSchedule').innerText = "即時資料庫安全連線中【" + tabName + "】...";
             openModal('shopDetailModal');
 
             const oldScript = document.getElementById('jsonp-tab-script');
@@ -218,23 +354,55 @@
                 const maxPhotos = 150; 
                 for (let i = 1; i <= maxPhotos; i++) {
                     const imgUrl = `https://raw.githubusercontent.com/sin1234tw-oss/sin01/main/${githubFolderNumber}/${i}.jpg`;
-                    const img = document.createElement('img');
-                    img.src = imgUrl;
-                    img.className = 'schedule-image';
-                    img.loading = 'lazy';
-                    
-                    /* 綁定點擊事件：點了就呼叫放大功能 */
-                    img.onclick = function() { openLightbox(imgUrl); };
-                    img.onerror = function() { this.remove(); };
-                    imgArea.appendChild(img);
+                    createImageElement(imgUrl, imgArea);
                 }
             } catch (e) {
                 console.error(e);
-                scheduleContainer.textContent = "讀取資料失敗，請檢查試算表。";
+                scheduleContainer.textContent = "讀取資料失敗，請檢查資料連結。";
             }
         }
 
-        /* 點選空白處關閉選單 */
+        /* 2. 本週報班 (同步使用不裁切多排網格) */
+        function fetchWeeklyPhotos(tabName, folderName) {
+            closeModal('weeklyScheduleMenuModal');
+            document.getElementById('dynamicShopTitle').innerText = tabName + " ｜ 本週報班動態";
+            document.getElementById('dynamicSchedule').style.display = "none"; 
+            
+            const imgArea = document.getElementById('dynamicImageArea');
+            imgArea.innerHTML = "";
+            
+            openModal('shopDetailModal');
+
+            const maxPhotos = 100;
+            for (let i = 1; i <= maxPhotos; i++) {
+                const imgUrl = `https://raw.githubusercontent.com/sin1234tw-oss/sin01/main/${folderName}/${i}.jpg`;
+                createImageElement(imgUrl, imgArea);
+            }
+        }
+
+        /* 通用無損網格渲染元件 */
+        function createImageElement(url, container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'img-wrapper';
+            wrapper.onclick = function() { openLightbox(url); };
+
+            const img = document.createElement('img');
+            img.src = url;
+            img.className = 'schedule-image';
+            img.loading = 'lazy';
+            img.onerror = function() { wrapper.remove(); };
+
+            wrapper.appendChild(img);
+
+            const badge = document.createElement('div');
+            badge.className = 'zoom-badge';
+            badge.innerHTML = '🔍';
+            wrapper.appendChild(badge);
+
+            container.appendChild(wrapper);
+        }
+
+        /* 點選彈窗外部空白處關閉 */
         window.onclick = function(event) { 
             if (event.target.classList.contains('modal')) { 
                 event.target.style.display = "none"; 
