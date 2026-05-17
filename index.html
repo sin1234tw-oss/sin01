@@ -9,7 +9,7 @@
         /* 基礎全域：暗黑極致深邃背景 */
         body { 
             background: radial-gradient(circle at center, #010410 0%, #000000 100%); 
-            color: #d8e6ff; 
+            color: #d8e6ff; /* 基礎文字改為冷白 */
             font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; 
             margin: 0; 
             display: flex; 
@@ -28,6 +28,8 @@
             font-size: 3.2rem; 
             font-weight: 900; 
             text-align: center; 
+            
+            /* 文字主體：強烈電光藍霓虹發光 */
             color: #fff;
             text-shadow: 
                 0 0 5px #fff,
@@ -36,6 +38,7 @@
                 0 0 40px #00e6e6,
                 0 0 80px #00e6e6,
                 0 0 100px #00e6e6;
+            
             letter-spacing: 12px; 
             text-transform: uppercase;
         }
@@ -43,7 +46,7 @@
         /* 移到最底部的專屬簽名樣式 */
         .brand-footer {
             font-size: 0.8rem;
-            color: #3e4860; 
+            color: #3e4860; /* 版權改為極低調冷灰色 */
             letter-spacing: 5px;
             margin-top: auto; 
             padding-top: 50px; 
@@ -59,7 +62,7 @@
         /* 按鈕進化：毒藥綠霓虹外殼 */
         .menu-btn { 
             background: linear-gradient(135deg, #0a0a0d 0%, #000000 100%); 
-            border: 1px solid rgba(0, 255, 128, 0.2); 
+            border: 1px solid rgba(0, 255, 128, 0.2); /* 冷綠霓虹線 */
             border-radius: 14px; 
             padding: 22px 26px; 
             display: flex; 
@@ -67,14 +70,17 @@
             align-items: center; 
             cursor: pointer; 
             box-shadow: 0 4px 15px rgba(0, 255, 128, 0.1), inset 0 1px 1px rgba(255,255,255,0.02); 
+            
+            /* 左側霓虹滾邊改為耀眼毒藥綠 */
             border-left: 6px solid #00ff80; 
+            
             transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .menu-btn:hover {
             transform: translateY(-2px);
             border-color: rgba(0, 255, 128, 0.7);
             box-shadow: 0 8px 25px rgba(0, 255, 128, 0.2), inset 0 1px 1px rgba(255,255,255,0.05);
-            border-left: 6px solid #57ffb5; 
+            border-left: 6px solid #57ffb5; /* 懸浮時提亮霓虹綠 */
         }
         .menu-btn:active {
             transform: scale(0.97) translateY(2px);
@@ -87,7 +93,7 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; }
         .modal-content { 
             background: linear-gradient(145deg, #05060b 0%, #000000 100%); 
-            border: 1px solid rgba(0, 255, 128, 0.35); 
+            border: 1px solid rgba(0, 255, 128, 0.35); /* 電光綠霓虹框 */
             outline: 2px solid rgba(0, 255, 128, 0.03);
             margin: 5vh auto; 
             padding: 30px 16px; 
@@ -97,7 +103,7 @@
             overflow-y: auto; 
             border-radius: 20px; 
             position: relative; 
-            color: #d8e6ff; 
+            color: #d8e6ff; /* 彈窗內基礎文字改為冷白 */
             text-align: left; 
             box-shadow: 0 20px 60px rgba(0,0,0,0.98), 0 0 30px rgba(0, 255, 128, 0.05);
         }
@@ -123,7 +129,7 @@
         .sub-menu-btn:hover { background: #00ff80; color: #000; font-weight: 800; box-shadow: 0 4px 18px rgba(0, 255, 128, 0.5); transform: scale(1.02); }
         .sub-menu-btn:active { transform: scale(0.97); background: #00b359; }
         
-        /* 班表文字框 */
+        /* 班表文字框：岩石鑿刻透光感 */
         .schedule-text { white-space: pre-wrap; word-break: break-all; background: #000000; padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 128, 0.1); border-left: 4px solid #00ff80; font-size: 1.1rem; line-height: 1.7; color: #ffffff; margin-bottom: 22px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.7); }
         
         /* 聯繫窗口專屬卡片 */
@@ -144,14 +150,14 @@
             .multi-column-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; } 
         }
         
-        /* 照片外框 */
+        /* 照片外框：固定正方形區域 */
         .img-wrapper {
             position: relative;
             width: 100%;
             aspect-ratio: 1 / 1; 
             cursor: pointer;
             border-radius: 8px;
-            border: 1px solid rgba(0, 255, 128, 0.1); 
+            border: 1px solid rgba(0, 255, 128, 0.1); /* 暗綠霓虹外框 */
             background-color: #010102; 
             overflow: hidden;
             transition: all 0.2s;
@@ -164,7 +170,14 @@
             box-shadow: 0 4px 15px rgba(0, 255, 128, 0.3);
         }
         .img-wrapper:active { transform: scale(0.96); }
-        .schedule-image { width: 100%; height: 100%; object-fit: contain; display: block; }
+        
+        /* 照片本體 */
+        .schedule-image { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            display: block; 
+        }
 
         /* 縮圖右下角放大提示 */
         .zoom-badge {
@@ -189,7 +202,10 @@
         .content-wrapper { display: flex; flex-direction: column; gap: 14px; }
         .price-time-section { background: linear-gradient(135deg, rgba(0, 255, 128, 0.04) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(0, 255, 128, 0.15); padding: 18px; border-radius: 12px; }
         .highlight-gold { color: #f2f7ff; font-weight: 700; font-size: 1.1rem; display: inline-block; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        
+        /* 霓虹突出強調文字 */
         .highlight-neon { color: #ff007f; font-weight: 700; font-size: 1.1rem; display: inline-block; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); }
+        
         .sub-text { color: #3e4860; font-size: 0.9rem; display: block; margin-top: 5px; }
         .custom-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 255, 128, 0.25), transparent); margin: 6px 0; }
         .mode-section { display: flex; flex-direction: column; gap: 10px; }
@@ -198,6 +214,65 @@
         .service-card { background: rgba(255,255,255,0.01); border: 1px dashed rgba(0, 255, 128, 0.2); padding: 16px; border-radius: 12px; color: #ffffff; font-size: 1rem; text-align: center; line-height: 1.6; box-shadow: inset 0 2px 6px rgba(0,0,0,0.3); }
         .extra-card { font-size: 0.9rem; color: #3e4860; text-align: center; border-top: 1px solid rgba(0, 255, 128, 0.1); padding-top: 14px; line-height: 1.5; }
         .extra-title { color: #00ff80; font-weight: 700; display: block; margin-bottom: 4px; }
+
+        /* ==================== 優惠方案 專用美化樣式 ==================== */
+        .promo-container { display: flex; flex-direction: column; gap: 16px; font-size: 0.95rem; }
+        
+        /* 核心回饋大卡片 */
+        .promo-main-reward {
+            background: linear-gradient(135deg, rgba(0, 255, 128, 0.1) 0%, rgba(0,0,0,0.6) 100%);
+            border: 1px solid #00ff80;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 128, 0.15);
+        }
+        .promo-main-title { color: #00ff80; font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 4px; text-shadow: 0 0 8px rgba(0, 255, 128, 0.4); }
+        .promo-main-subtitle { color: #ffffff; font-size: 1.05rem; font-weight: 700; letter-spacing: 1px; }
+
+        /* 規則區塊標題 */
+        .promo-section-title { color: #ffffff; font-weight: 700; font-size: 1.05rem; border-left: 3px solid #00ff80; padding-left: 8px; margin: 10px 0 5px 0; }
+        
+        /* 條列卡片 */
+        .promo-item-card {
+            background: #000000;
+            border: 1px solid rgba(0, 255, 128, 0.15);
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .promo-item-header { display: flex; align-items: center; justify-content: space-between; }
+        .promo-badge { background: rgba(0, 255, 128, 0.1); border: 1px solid rgba(0, 255, 128, 0.4); color: #00ff80; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; }
+        .promo-item-title { color: #ffffff; font-weight: 700; font-size: 1rem; }
+        .promo-item-desc { color: #d8e6ff; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap; }
+
+        /* 結尾備註 */
+        .promo-footer-note { text-align: center; color: #3e4860; font-size: 0.85rem; font-weight: 700; margin-top: 5px; }
+
+        /* 新客折扣爆炸區塊 */
+        .new-guest-box {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.08) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px dashed #ff007f;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 5px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
+        }
+        .new-guest-title { color: #ff007f; font-size: 1.2rem; font-weight: 800; display: block; margin-bottom: 2px; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
+        .new-guest-subtitle { color: #3e4860; font-size: 0.85rem; display: block; margin-bottom: 12px; }
+        .new-guest-condition { color: #ffffff; font-size: 1rem; font-weight: 700; display: block; margin-bottom: 12px; }
+        .new-guest-discount {
+            color: #ff007f;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -217,6 +292,22 @@
             <span class="btn-text">本週各館報班</span>
             <span class="btn-arrow">▶</span>
         </div>
+        
+        <div class="menu-btn" onclick="openModal('shopLocationModal')">
+            <span class="btn-text">各館位置</span>
+            <span class="btn-arrow">▶</span>
+        </div>
+        
+        <div class="menu-btn" onclick="openModal('discountPromoModal')">
+            <span class="btn-text">優惠方案</span>
+            <span class="btn-arrow">▶</span>
+        </div>
+        
+        <div class="menu-btn" onclick="openModal('limitedTimePromoModal')">
+            <span class="btn-text">限時優惠</span>
+            <span class="btn-arrow">▶</span>
+        </div>
+
         <div class="menu-btn" onclick="openModal('contactModal')">
             <span class="btn-text">快速聯繫窗口</span>
             <span class="btn-arrow">▶</span>
@@ -231,7 +322,7 @@
                 <div class="price-time-section">
                     <span class="highlight-neon">金額 2900 - 3900 起</span>
                     <span class="sub-text">依所選擇之美容師定價為準</span>
-                    <div style="margin-top: 8px;"><span class="highlight-gold">時間 60 分 (含精緻沖澡)</span></div>
+                    <div style="margin-top: 8px;"><span class="highlight-gold">時間 60 分 (含沖澡)</span></div>
                 </div>
                 <div class="custom-hr"></div>
                 <div class="mode-section">
@@ -246,6 +337,99 @@
                 </div>
                 <div class="custom-hr"></div>
                 <div class="extra-card"><span class="extra-title">進階客製化課程費用請現場洽談</span>音樂互動課程 ｜ 進階體育互動課程</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="shopLocationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('shopLocationModal')">×</span>
+            <div class="modal-title-header">各館位置</div>
+            <div class="schedule-text" style="line-height: 1.8;">1館  長春路62<br>2館  林森北路282<br>3館  林森北路289<br>4館  林森北路289<br>5館  林森北路409<br>6館  錦州街36<br>7館  南京東路2段11</div>
+        </div>
+    </div>
+
+    <div id="discountPromoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('discountPromoModal')">×</span>
+            <div class="modal-title-header">優惠方案</div>
+            <div class="promo-container">
+                
+                <div class="promo-main-reward">
+                    <span class="promo-main-title">2026優惠方案</span>
+                    <span class="promo-main-subtitle">累積八點 消費折扣500一次</span>
+                </div>
+
+                <div class="promo-section-title">點數累積規則</div>
+
+                <div class="promo-item-card">
+                    <div class="promo-item-header">
+                        <span class="promo-item-title">當年度 回沖</span>
+                        <span class="promo-badge">累積一點</span>
+                    </div>
+                    <div class="promo-item-desc">同一館同一個妹子~~<br>可累積一點~~</div>
+                </div>
+
+                <div class="promo-item-card">
+                    <div class="promo-item-header">
+                        <span class="promo-item-title">填寫客評</span>
+                        <span class="promo-badge">累積一點</span>
+                    </div>
+                    <div class="promo-item-desc">(回沖不用填寫)<br>給予詳細客評~~<br>可累積一點~~</div>
+                </div>
+
+                <div class="promo-item-card">
+                    <div class="promo-item-header">
+                        <span class="promo-item-title">帶新朋友來消費</span>
+                        <span class="promo-badge">依人數累加</span>
+                    </div>
+                    <div class="promo-item-desc">你帶新朋友來消費且成功<br>一位朋友 累積一點<br>兩位朋友 累積裝兩點<br>三位朋友 累積三點<br>以此類推</div>
+                </div>
+
+                <div class="promo-item-card">
+                    <div class="promo-item-header">
+                        <span class="promo-item-title">新朋友+我好友</span>
+                        <span class="promo-badge">多加一點</span>
+                    </div>
+                    <div class="promo-item-desc">若是你的朋友有消費成功<br>並且加我好友可以多加一點</div>
+                </div>
+
+                <div class="promo-item-card">
+                    <div class="promo-item-header">
+                        <span class="promo-item-title">介紹朋友消費</span>
+                        <span class="promo-badge">立即獲得1+1</span>
+                    </div>
+                    <div class="promo-item-desc">若是有消費成功<br>立即獲得1+1<br>(沒消費 我會註記介紹人)</div>
+                </div>
+
+                <div class="promo-footer-note">
+                    以上<br>(累積8點 下次可折扣500)<br>(我都會登記)
+                </div>
+
+                <div class="custom-hr"></div>
+
+                <div class="new-guest-box">
+                    <span class="new-guest-title">🔥新客優惠🔥</span>
+                    <span class="new-guest-subtitle">(侷限 新加 幹部好友 )</span>
+                    <span class="new-guest-condition">首次消費<br>不管現場挑選或是預約</span>
+                    <div class="custom-hr" style="border-color: rgba(255, 0, 127, 0.2)"></div>
+                    <div class="new-guest-discount">
+                        新客首約折扣100<br>
+                        新客首約 折扣100<br>
+                        新客首約 折扣100
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="limitedTimePromoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('limitedTimePromoModal')">×</span>
+            <div class="modal-title-header">限時優惠</div>
+            <div class="service-card" style="padding: 60px 20px; font-size: 1.35rem; font-weight: 700; color: #00ff80; text-shadow: 0 0 8px rgba(0, 255, 128, 0.4); display: flex; justify-content: center; align-items: center;">
+                不定期發佈
             </div>
         </div>
     </div>
@@ -276,7 +460,7 @@
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('3館-愛寶', '3班表')">3館 - 愛寶</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('4館-芯苑', '4班表')">4館 - 芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('5館-潘朵拉', '5班表')">5館 - 潘朵拉</div>
-                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館-手中情</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館 - 手中情</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('7館-樂鑽', '7班表')">7館 - 樂鑽</div>
             </div>
         </div>
@@ -290,15 +474,14 @@
                 <div style="color: #00ff80; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-shadow: 0 0 5px #00ff80;">官方 LINE ID</div>
                 <div class="contact-id">wa1234cc</div>
                 <div style="color: #3e4860; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
-                <div class="custom-hr" style="width: 100%;"></div>
-                <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</a>
+                <div class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</div>
             </div>
         </div>
     </div>
 
     <div id="shopDetailModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeDetailModal()">×</span>
+            <span class="close-btn" onclick="closeModal('shopDetailModal')">×</span>
             <div id="dynamicShopTitle" class="modal-title-header">館別名稱</div>
             <div id="dynamicSchedule" class="schedule-text">正在即時讀取加密分頁資料...</div>
             <div id="dynamicImageArea" class="multi-column-grid"></div>
@@ -314,24 +497,9 @@
     <script>
         const SPREADSHEET_ID = '1i0yb8gEWBHBJaY6KGtc_NasIC6oe5XUBx9wwoO3_MiM'; 
         let githubFolderNumber = '1'; 
-        let currentMenuSource = ''; 
 
-        function openModal(id) { 
-            document.getElementById(id).style.display = "block"; 
-        }
-        function closeModal(id) { 
-            document.getElementById(id).style.display = "none"; 
-        }
-
-        /* 核心改動：智慧返回原本的館別清單 */
-        function closeDetailModal() {
-            closeModal('shopDetailModal');
-            if (currentMenuSource === 'daily') {
-                openModal('shopMenuModal');
-            } else if (currentMenuSource === 'weekly') {
-                openModal('weeklyScheduleMenuModal');
-            }
-        }
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
         function openLightbox(src) {
             document.getElementById('lightboxImg').src = src;
@@ -341,6 +509,7 @@
             document.getElementById('photoLightbox').style.display = "none";
         }
 
+        /* 輔助函式：取得今天的「幾月幾號週幾」 */
         function getFormattedToday() {
             const today = new Date();
             const month = today.getMonth() + 1; 
@@ -350,9 +519,8 @@
             return ` (${month}/${date} ${dayOfWeek})`;
         }
 
-        /* 當日動態：加入來源標記 */
+        /* 1. 當日動態 (自動帶入日期) */
         function fetchShopTab(tabName, folderNum) {
-            currentMenuSource = 'daily'; 
             closeModal('shopMenuModal'); 
             githubFolderNumber = folderNum; 
             
@@ -403,9 +571,8 @@
             }
         }
 
-        /* 本週報班：加入來源標記 */
+        /* 2. 本週報班 */
         function fetchWeeklyPhotos(tabName, folderName) {
-            currentMenuSource = 'weekly'; 
             closeModal('weeklyScheduleMenuModal');
             document.getElementById('dynamicShopTitle').innerText = tabName + " ｜ 本週報班動態";
             document.getElementById('dynamicSchedule').style.display = "none"; 
@@ -422,6 +589,7 @@
             }
         }
 
+        /* 通用無損網格渲染元件 */
         function createImageElement(url, container) {
             const wrapper = document.createElement('div');
             wrapper.className = 'img-wrapper';
@@ -443,17 +611,14 @@
             container.appendChild(wrapper);
         }
 
-        /* 點選彈窗外部空白處關閉攔截 */
+        /* 點選彈窗外部空白處關閉 */
         window.onclick = function(event) { 
             if (event.target.classList.contains('modal')) { 
-                if (event.target.id === 'shopDetailModal') {
-                    closeDetailModal(); 
-                } else {
-                    event.target.style.display = "none"; 
-                }
+                event.target.style.display = "none"; 
             } 
         }
 
+        /* PWA Service Worker 核心註冊 */
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
