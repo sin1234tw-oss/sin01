@@ -6,10 +6,10 @@
     <title>享樂紓壓</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        /* 基礎全域奢華深色調 */
+        /* 基礎全域：暗黑極致深邃背景 */
         body { 
-            background: radial-gradient(circle at center, #0c0c0c 0%, #020202 100%); 
-            color: #f1df99; 
+            background: radial-gradient(circle at center, #010410 0%, #000000 100%); 
+            color: #d8e6ff; /* 基礎文字改為冷白 */
             font-family: "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; 
             margin: 0; 
             display: flex; 
@@ -18,29 +18,38 @@
             min-height: 100vh; 
             padding: 20px;
             box-sizing: border-box;
+            letter-spacing: 0.05em;
         }
 
-        /* 主標題進化：奢華漸層金流 */
+        /* 主標題：電光藍霓虹風暴 */
         .main-title { 
             margin-top: 50px; 
-            margin-bottom: 40px; /* 增加下方間距，讓排版更從容大氣 */
-            font-size: 3rem; 
+            margin-bottom: 40px;
+            font-size: 3.2rem; 
             font-weight: 900; 
             text-align: center; 
-            background: linear-gradient(135deg, #ffffff 0%, #f1df99 40%, #d4af37 70%, #aa820a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 6px; 
-            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.25); 
+            
+            /* 文字主體：強烈電光藍霓虹發光 */
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #0ff,
+                0 0 20px #0ff,
+                0 0 40px #00e6e6,
+                0 0 80px #00e6e6,
+                0 0 100px #00e6e6;
+            
+            letter-spacing: 12px; 
+            text-transform: uppercase;
         }
 
         /* 移到最底部的專屬簽名樣式 */
         .brand-footer {
-            font-size: 0.85rem;
-            color: #7a683a;
-            letter-spacing: 4px;
-            margin-top: auto; /* 關鍵：自動將版權推至網頁最底部 */
-            padding-top: 50px; /* 確保與上方選單保持安全距離 */
+            font-size: 0.8rem;
+            color: #3e4860; /* 版權改為極低調冷灰色 */
+            letter-spacing: 5px;
+            margin-top: auto; 
+            padding-top: 50px; 
             padding-bottom: 20px;
             text-transform: uppercase;
             font-weight: 500;
@@ -50,34 +59,42 @@
         /* 選單容器 */
         .menu-container { width: 95%; max-width: 480px; display: flex; flex-direction: column; gap: 20px; }
         
-        /* 按鈕進化：黑金屬拉絲與發光金邊 */
+        /* 按鈕進化：毒藥綠霓虹外殼 */
         .menu-btn { 
-            background: linear-gradient(135deg, #1c1c1c 0%, #0d0d0d 100%); 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
+            background: linear-gradient(135deg, #0a0a0d 0%, #000000 100%); 
+            border: 1px solid rgba(0, 255, 128, 0.2); /* 冷綠霓虹線 */
             border-radius: 14px; 
-            padding: 24px 28px; 
+            padding: 22px 26px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             cursor: pointer; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05); 
-            border-left: 6px solid #d4af37; 
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(0, 255, 128, 0.1), inset 0 1px 1px rgba(255,255,255,0.02); 
+            
+            /* 左側霓虹滾邊改為耀眼毒藥綠 */
+            border-left: 6px solid #00ff80; 
+            
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .menu-btn:hover {
             transform: translateY(-2px);
-            border-color: rgba(212, 175, 55, 0.8);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
+            border-color: rgba(0, 255, 128, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 255, 128, 0.2), inset 0 1px 1px rgba(255,255,255,0.05);
+            border-left: 6px solid #57ffb5; /* 懸浮時提亮霓虹綠 */
         }
-        .btn-text { color: #ffffff; font-size: 1.35rem; font-weight: 700; letter-spacing: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .btn-arrow { color: #d4af37; font-size: 0.9rem; opacity: 0.8; }
+        .menu-btn:active {
+            transform: scale(0.97) translateY(2px);
+            box-shadow: 0 4px 12px rgba(0, 255, 128, 0.05);
+        }
+        .btn-text { color: #ffffff; font-size: 1.35rem; font-weight: 700; letter-spacing: 4px; text-shadow: 0 0 8px rgba(0, 255, 128, 0.4); }
+        .btn-arrow { color: #00ff80; font-size: 0.9rem; opacity: 0.9; text-shadow: 0 0 5px #00ff80; }
         
-        /* 奢華彈窗核心結構 */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 1000; }
+        /* 奢華彈窗核心結構（毛玻璃透光質感，黑藍色調） */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; }
         .modal-content { 
-            background: linear-gradient(145deg, #161616 0%, #080808 100%); 
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            outline: 4px solid rgba(212, 175, 55, 0.05);
+            background: linear-gradient(145deg, #05060b 0%, #000000 100%); 
+            border: 1px solid rgba(0, 255, 128, 0.35); /* 電光綠霓虹框 */
+            outline: 2px solid rgba(0, 255, 128, 0.03);
             margin: 5vh auto; 
             padding: 30px 16px; 
             width: 95%; 
@@ -86,18 +103,18 @@
             overflow-y: auto; 
             border-radius: 20px; 
             position: relative; 
-            color: #f5ecc2; 
+            color: #d8e6ff; /* 彈窗內基礎文字改為冷白 */
             text-align: left; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 40px rgba(212, 175, 55, 0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.98), 0 0 30px rgba(0, 255, 128, 0.05);
         }
-        .close-btn { position: absolute; top: 15px; right: 22px; color: #d4af37; font-size: 32px; font-weight: 300; cursor: pointer; z-index: 1001; }
+        .close-btn { position: absolute; top: 15px; right: 22px; color: #00ff80; font-size: 32px; font-weight: 300; cursor: pointer; z-index: 1001; text-shadow: 0 0 6px rgba(0, 255, 128, 0.5); }
         
         /* 彈窗子分頁與卡片樣式 */
-        .modal-title-header { text-align: center; color: #ffffff; font-size: 1.4rem; font-weight: 700; margin-top: 0; margin-bottom: 25px; letter-spacing: 2px; border-bottom: 1px solid rgba(212, 175, 55, 0.15); padding-bottom: 15px; }
+        .modal-title-header { text-align: center; color: #ffffff; font-size: 1.45rem; font-weight: 700; margin-top: 0; margin-bottom: 25px; letter-spacing: 3px; border-bottom: 1px solid rgba(0, 255, 128, 0.15); padding-bottom: 16px; text-shadow: 0 0 10px rgba(0, 255, 128, 0.6); text-transform: uppercase; }
         .sub-menu-container { display: flex; flex-direction: column; gap: 14px; margin-top: 5px; }
         .sub-menu-btn { 
-            background: linear-gradient(180deg, #222 0%, #161616 100%); 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
+            background: linear-gradient(180deg, #101217 0%, #05060a 100%); 
+            border: 1px solid rgba(0, 255, 128, 0.3); 
             color: #fff; 
             padding: 16px; 
             font-size: 1.15rem; 
@@ -105,18 +122,23 @@
             border-radius: 10px; 
             text-align: center; 
             cursor: pointer; 
-            transition: all 0.2s;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
         }
-        .sub-menu-btn:hover { background: #d4af37; color: #000; font-weight: 800; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+        .sub-menu-btn:hover { background: #00ff80; color: #000; font-weight: 800; box-shadow: 0 4px 18px rgba(0, 255, 128, 0.5); transform: scale(1.02); }
+        .sub-menu-btn:active { transform: scale(0.97); background: #00b359; }
         
-        .schedule-text { white-space: pre-wrap; word-break: break-all; background: #0d0d0d; padding: 18px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.15); border-left: 4px solid #d4af37; font-size: 1.1rem; line-height: 1.6; color: #ffffff; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        /* 班表文字框：岩石鑿刻透光感 */
+        .schedule-text { white-space: pre-wrap; word-break: break-all; background: #000000; padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 255, 128, 0.1); border-left: 4px solid #00ff80; font-size: 1.1rem; line-height: 1.7; color: #ffffff; margin-bottom: 22px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.7); }
         
         /* 聯繫窗口專屬卡片 */
-        .contact-card { background: #0a0a0a; border: 1px dashed rgba(212, 175, 55, 0.4); padding: 25px 20px; border-radius: 14px; text-align: center; display: flex; flex-direction: column; gap: 18px; align-items: center; }
-        .contact-id { font-size: 1.7rem; color: #ffffff; font-weight: 800; letter-spacing: 2px; background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.02) 100%); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(212,175,55,0.4); }
-        .contact-action-btn { display: inline-block; width: 90%; background: linear-gradient(180deg, #f1df99 0%, #d4af37 50%, #aa820a 100%); color: #000000; text-decoration: none; font-size: 1.3rem; font-weight: 800; padding: 15px 0; border-radius: 30px; box-shadow: 0 6px 20px rgba(212,175,55,0.4); text-align: center; letter-spacing: 2px; }
+        .contact-card { background: #000000; border: 1px dashed rgba(0, 255, 128, 0.3); padding: 28px 20px; border-radius: 16px; text-align: center; display: flex; flex-direction: column; gap: 20px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .contact-id { font-size: 1.7rem; color: #ffffff; font-weight: 800; letter-spacing: 2px; background: linear-gradient(90deg, rgba(0, 255, 128, 0.08) 0%, rgba(0, 255, 128, 0.01) 100%); padding: 12px 30px; border-radius: 30px; border: 1px solid rgba(0, 255, 128, 0.35); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+        .contact-action-btn { display: inline-block; width: 92%; background: linear-gradient(180deg, #fff 0%, #00ff80 50%, #00b359 100%); color: #000000; text-decoration: none; font-size: 1.3rem; font-weight: 800; padding: 15px 0; border-radius: 30px; box-shadow: 0 6px 25px rgba(0, 255, 128, 0.6); text-align: center; letter-spacing: 2px; transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .contact-action-btn:active { transform: scale(0.96); }
 
-        /* 密集型多排網格（手機版 3 排，自動適應） */
+        /* 密集型多排網格 */
         .multi-column-grid { 
             width: 100%; 
             display: grid; 
@@ -125,7 +147,7 @@
             margin-top: 15px;
         }
         @media (min-width: 400px) {
-            .multi-column-grid { grid-template-columns: repeat(4, 1fr); } 
+            .multi-column-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; } 
         }
         
         /* 照片外框：固定正方形區域 */
@@ -134,19 +156,22 @@
             width: 100%;
             aspect-ratio: 1 / 1; 
             cursor: pointer;
-            border-radius: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            background-color: #080808; 
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 128, 0.1); /* 暗綠霓虹外框 */
+            background-color: #010102; 
             overflow: hidden;
             transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .img-wrapper:hover { 
             transform: scale(1.05); 
-            border-color: rgba(212, 175, 55, 0.7); 
+            border-color: rgba(0, 255, 128, 0.6); 
             z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 255, 128, 0.3);
         }
+        .img-wrapper:active { transform: scale(0.96); }
         
-        /* 照片本體：用 contain 確保直橫圖都絕對不裁切 */
+        /* 照片本體 */
         .schedule-image { 
             width: 100%; 
             height: 100%; 
@@ -159,31 +184,36 @@
             position: absolute;
             bottom: 2px;
             right: 2px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #d4af37;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00ff80;
             border-radius: 3px;
             padding: 1px 3px;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             pointer-events: none;
+            border: 0.5px solid rgba(0, 255, 128, 0.2);
         }
 
         /* 奢華高清大圖燈箱 */
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; }
-        .lightbox img { max-width: 95%; max-height: 92vh; object-fit: contain; border: 2px solid #d4af37; border-radius: 14px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: zoomIn 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.98); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; }
+        .lightbox img { max-width: 95%; max-height: 92vh; object-fit: contain; border: 1px solid #00ff80; border-radius: 14px; box-shadow: 0 0 50px rgba(0, 255, 128, 0.6); animation: zoomIn 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); }
         @keyframes zoomIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* 消費方式內頁編排 */
-        .content-wrapper { display: flex; flex-direction: column; gap: 12px; }
-        .price-time-section { background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(212, 175, 55, 0.25); padding: 16px; border-radius: 12px; }
-        .highlight-gold { color: #ffd700; font-weight: 800; font-size: 1.2rem; display: inline-block; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .sub-text { color: #ccc; font-size: 0.95rem; display: block; margin-top: 4px; }
-        .custom-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); margin: 8px 0; }
+        .content-wrapper { display: flex; flex-direction: column; gap: 14px; }
+        .price-time-section { background: linear-gradient(135deg, rgba(0, 255, 128, 0.04) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(0, 255, 128, 0.15); padding: 18px; border-radius: 12px; }
+        .highlight-gold { color: #f2f7ff; font-weight: 700; font-size: 1.1rem; display: inline-block; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+        
+        /* 霓虹突出強調文字 */
+        .highlight-neon { color: #ff007f; font-weight: 700; font-size: 1.1rem; display: inline-block; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); }
+        
+        .sub-text { color: #3e4860; font-size: 0.9rem; display: block; margin-top: 5px; }
+        .custom-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 255, 128, 0.25), transparent); margin: 6px 0; }
         .mode-section { display: flex; flex-direction: column; gap: 10px; }
-        .mode-card { background: #0c0c0c; border-left: 4px solid #d4af37; padding: 12px 16px; border-radius: 4px 10px 10px 4px; }
-        .mode-title { color: #ffffff; font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; display: block; }
-        .service-card { background: rgba(255,255,255,0.01); border: 1px dashed rgba(212, 175, 55, 0.3); padding: 14px 16px; border-radius: 10px; color: #ffffff; font-size: 1.05rem; text-align: center; }
-        .extra-card { font-size: 0.95rem; color: #a8a8a8; text-align: center; border-top: 1px solid rgba(212,175,55,0.15); padding-top: 12px; }
-        .extra-title { color: #d4af37; font-weight: 700; display: block; margin-bottom: 4px; }
+        .mode-card { background: #000000; border-left: 3px solid #00ff80; padding: 14px 16px; border-radius: 4px 10px 10px 4px; font-size: 0.95rem; color: #d8e6ff; line-height: 1.6; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .mode-title { color: #ffffff; font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; display: block; }
+        .service-card { background: rgba(255,255,255,0.01); border: 1px dashed rgba(0, 255, 128, 0.2); padding: 16px; border-radius: 12px; color: #ffffff; font-size: 1rem; text-align: center; line-height: 1.6; box-shadow: inset 0 2px 6px rgba(0,0,0,0.3); }
+        .extra-card { font-size: 0.9rem; color: #3e4860; text-align: center; border-top: 1px solid rgba(0, 255, 128, 0.1); padding-top: 14px; line-height: 1.5; }
+        .extra-title { color: #00ff80; font-weight: 700; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -215,9 +245,9 @@
             <div class="modal-title-header">精選消費方式</div>
             <div class="content-wrapper">
                 <div class="price-time-section">
-                    <span class="highlight-gold">金額 2900 - 3900 起</span>
+                    <span class="highlight-neon">金額 2900 - 3900 起</span>
                     <span class="sub-text">依所選擇之美容師定價為準</span>
-                    <div style="margin-top: 8px;"><span class="highlight-gold">時間 60 分 (含精緻沖澡)</span></div>
+                    <div style="margin-top: 8px;"><span class="highlight-gold">時間 60 分 (含沖澡)</span></div>
                 </div>
                 <div class="custom-hr"></div>
                 <div class="mode-section">
@@ -262,7 +292,7 @@
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('3館-愛寶', '3班表')">3館 - 愛寶</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('4館-芯苑', '4班表')">4館 - 芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('5館-潘朵拉', '5班表')">5館 - 潘朵拉</div>
-                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館 - 手中情</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館過期不可加入好友</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('7館-樂鑽', '7班表')">7館 - 樂鑽</div>
             </div>
         </div>
@@ -273,9 +303,9 @@
             <span class="close-btn" onclick="closeModal('contactModal')">×</span>
             <div class="modal-title-header">快速聯繫窗口</div>
             <div class="contact-card">
-                <div style="color: #d4af37; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px;">官方 LINE ID</div>
+                <div style="color: #00ff80; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-shadow: 0 0 5px #00ff80;">官方 LINE ID</div>
                 <div class="contact-id">wa1234cc</div>
-                <div style="color: #bbbbbb; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
+                <div style="color: #3e4860; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
                 <div class="custom-hr" style="width: 100%;"></div>
                 <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</a>
             </div>
@@ -298,6 +328,7 @@
     <div class="brand-footer">SIN 製作</div>
 
     <script>
+        // 所有 JavaScript 程式碼都保持原本，100% 只改風格
         const SPREADSHEET_ID = '1i0yb8gEWBHBJaY6KGtc_NasIC6oe5XUBx9wwoO3_MiM'; 
         let githubFolderNumber = '1'; 
 
