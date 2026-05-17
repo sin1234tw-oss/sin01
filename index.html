@@ -444,7 +444,7 @@
                 <div class="sub-menu-btn" onclick="fetchShopTab('3館-愛寶', '3')">3館 - 愛寶</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('4館-芯苑', '4')">4館 - 芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('5館-潘朵拉', '5')">5館 - 潘朵拉</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('6館過期不可加入好友', '6')">6館過期不可加入好友</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('6館-手中情', '6')">6館 - 手中情</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7館 - 樂鑽</div>
             </div>
         </div>
@@ -460,7 +460,7 @@
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('3館-愛寶', '3班表')">3館 - 愛寶</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('4館-芯苑', '4班表')">4館 - 芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('5館-潘朵拉', '5班表')">5館 - 潘朵拉</div>
-                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館過期不可加入好友', '6班表')">6館過期不可加入好友</div>
+                <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('6館-手中情', '6班表')">6館 - 手中情</div>
                 <div class="sub-menu-btn" onclick="fetchWeeklyPhotos('7館-樂鑽', '7班表')">7館 - 樂鑽</div>
             </div>
         </div>
@@ -474,14 +474,14 @@
                 <div style="color: #00ff80; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-shadow: 0 0 5px #00ff80;">官方 LINE ID</div>
                 <div class="contact-id">wa1234cc</div>
                 <div style="color: #3e4860; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
-                <div class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</div>
+                <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</a>
             </div>
         </div>
     </div>
 
     <div id="shopDetailModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('shopDetailModal')">×</span>
+            <span class="close-btn" onclick="closeShopDetail()">×</span>
             <div id="dynamicShopTitle" class="modal-title-header">館別名稱</div>
             <div id="dynamicSchedule" class="schedule-text">正在即時讀取加密分頁資料...</div>
             <div id="dynamicImageArea" class="multi-column-grid"></div>
@@ -497,9 +497,19 @@
     <script>
         const SPREADSHEET_ID = '1i0yb8gEWBHBJaY6KGtc_NasIC6oe5XUBx9wwoO3_MiM'; 
         let githubFolderNumber = '1'; 
+        let currentParentModal = ''; // 紀錄當前是從哪個選單點進來的
 
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        // 專門關閉內頁並返回上一層的邏輯
+        function closeShopDetail() {
+            closeModal('shopDetailModal');
+            // 如果知道上層是誰，就自動開回來
+            if (currentParentModal) {
+                openModal(currentParentModal);
+            }
+        }
 
         function openLightbox(src) {
             document.getElementById('lightboxImg').src = src;
@@ -509,7 +519,7 @@
             document.getElementById('photoLightbox').style.display = "none";
         }
 
-        /* 輔助函式：取得今天的「幾月幾號週幾」 */
+        /* 輔支函式：取得今天的「幾月幾號週幾」 */
         function getFormattedToday() {
             const today = new Date();
             const month = today.getMonth() + 1; 
@@ -521,6 +531,7 @@
 
         /* 1. 當日動態 (自動帶入日期) */
         function fetchShopTab(tabName, folderNum) {
+            currentParentModal = 'shopMenuModal'; // 註記來源為「各館當日動態」
             closeModal('shopMenuModal'); 
             githubFolderNumber = folderNum; 
             
@@ -573,6 +584,7 @@
 
         /* 2. 本週報班 */
         function fetchWeeklyPhotos(tabName, folderName) {
+            currentParentModal = 'weeklyScheduleMenuModal'; // 註記來源為「本週各館報班」
             closeModal('weeklyScheduleMenuModal');
             document.getElementById('dynamicShopTitle').innerText = tabName + " ｜ 本週報班動態";
             document.getElementById('dynamicSchedule').style.display = "none"; 
@@ -611,9 +623,11 @@
             container.appendChild(wrapper);
         }
 
-        /* 點選彈窗外部空白處關閉 */
+        /* 點選彈窗外部空白處關閉 (同步套用返回上一層邏輯) */
         window.onclick = function(event) { 
-            if (event.target.classList.contains('modal')) { 
+            if (event.target.id === 'shopDetailModal') {
+                closeShopDetail();
+            } else if (event.target.classList.contains('modal')) { 
                 event.target.style.display = "none"; 
             } 
         }
