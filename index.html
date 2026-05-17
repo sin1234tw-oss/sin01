@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>享樂紓壓</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         /* 基礎全域奢華深色調 */
         body { 
@@ -22,7 +23,7 @@
         /* 主標題進化：奢華漸層金流 */
         .main-title { 
             margin-top: 50px; 
-            margin-bottom: 5px; 
+            margin-bottom: 40px; /* 增加下方間距，讓排版更從容大氣 */
             font-size: 3rem; 
             font-weight: 900; 
             text-align: center; 
@@ -33,19 +34,17 @@
             text-shadow: 0 4px 20px rgba(212, 175, 55, 0.25); 
         }
 
-        /* 專屬簽名樣式 */
+        /* 移到最底部的專屬簽名樣式 */
         .brand-footer {
             font-size: 0.85rem;
             color: #7a683a;
             letter-spacing: 4px;
-            margin-bottom: 40px;
+            margin-top: auto; /* 關鍵：自動將版權推至網頁最底部 */
+            padding-top: 50px; /* 確保與上方選單保持安全距離 */
+            padding-bottom: 20px;
             text-transform: uppercase;
             font-weight: 500;
-        }
-        .brand-footer span {
-            border-left: 1px solid #44371c;
-            padding-left: 6px;
-            margin-left: 4px;
+            text-align: center;
         }
 
         /* 選單容器 */
@@ -117,27 +116,27 @@
         .contact-id { font-size: 1.7rem; color: #ffffff; font-weight: 800; letter-spacing: 2px; background: linear-gradient(90deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.02) 100%); padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(212,175,55,0.4); }
         .contact-action-btn { display: inline-block; width: 90%; background: linear-gradient(180deg, #f1df99 0%, #d4af37 50%, #aa820a 100%); color: #000000; text-decoration: none; font-size: 1.3rem; font-weight: 800; padding: 15px 0; border-radius: 30px; box-shadow: 0 6px 20px rgba(212,175,55,0.4); text-align: center; letter-spacing: 2px; }
 
-        /* 終極優化：密集型多排網格（手機版直接呈現 3~4 排，放得更多、更好看） */
+        /* 密集型多排網格（手機版 3 排，自動適應） */
         .multi-column-grid { 
             width: 100%; 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); /* 預設手機版 3 排，如果你想要更小更多排，可以改成 repeat(4, 1fr) */
+            grid-template-columns: repeat(3, 1fr); 
             gap: 6px; 
             margin-top: 15px;
         }
         @media (min-width: 400px) {
-            .multi-column-grid { grid-template-columns: repeat(4, 1fr); } /* 螢幕稍大自動變精緻 4 排 */
+            .multi-column-grid { grid-template-columns: repeat(4, 1fr); } 
         }
         
-        /* 照片外框：固定正方形區域，保持排列絕對整齊 */
+        /* 照片外框：固定正方形區域 */
         .img-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1; /* 框框維持完美的 1:1 */
+            aspect-ratio: 1 / 1; 
             cursor: pointer;
             border-radius: 6px;
             border: 1px solid rgba(212, 175, 55, 0.2);
-            background-color: #080808; /* 背景全黑襯托 */
+            background-color: #080808; 
             overflow: hidden;
             transition: all 0.2s;
         }
@@ -147,11 +146,11 @@
             z-index: 5;
         }
         
-        /* 照片本體：關鍵！用 contain 確保在多排小圖中也「絕對完整、不被裁切任何一邊」 */
+        /* 照片本體：用 contain 確保直橫圖都絕對不裁切 */
         .schedule-image { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* 精髓：照片完整縮小塞入，直圖、橫圖都絕不切邊 */
+            object-fit: contain; 
             display: block; 
         }
 
@@ -168,7 +167,7 @@
             pointer-events: none;
         }
 
-        /* 奢華高清大圖燈箱：點開後完美無損顯示原圖 */
+        /* 奢華高清大圖燈箱 */
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.97); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; }
         .lightbox img { max-width: 95%; max-height: 92vh; object-fit: contain; border: 2px solid #d4af37; border-radius: 14px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: zoomIn 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); }
         @keyframes zoomIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -190,7 +189,6 @@
 <body>
 
     <h1 class="main-title">享樂紓壓</h1>
-    <div class="brand-footer">SIN 製作 <span>DESIGN BY SIN</span></div>
 
     <div class="menu-container">
         <div class="menu-btn" onclick="openModal('priceModal')">
@@ -279,7 +277,7 @@
                 <div class="contact-id">wa1234cc</div>
                 <div style="color: #bbbbbb; font-size: 0.95rem; line-height: 1.5; padding: 0 10px;">點擊下方金色按鈕即可自動導向 LINE<br>或複製上方 ID 進行搜尋加入好友。</div>
                 <div class="custom-hr" style="width: 100%;"></div>
-                <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點擊立刻整合連線</a>
+                <a class="contact-action-btn" href="https://line.me/ti/p/bYEPM3Bkqw" target="_blank" rel="noopener noreferrer">點我立刻跳轉</a>
             </div>
         </div>
     </div>
@@ -297,6 +295,8 @@
         <img id="lightboxImg" src="" alt="原圖無損放大">
     </div>
 
+    <div class="brand-footer">SIN 製作</div>
+
     <script>
         const SPREADSHEET_ID = '1i0yb8gEWBHBJaY6KGtc_NasIC6oe5XUBx9wwoO3_MiM'; 
         let githubFolderNumber = '1'; 
@@ -312,11 +312,23 @@
             document.getElementById('photoLightbox').style.display = "none";
         }
 
-        /* 1. 當日動態 (多排精緻網格) */
+        /* 輔助函式：取得今天的「幾月幾號週幾」 */
+        function getFormattedToday() {
+            const today = new Date();
+            const month = today.getMonth() + 1; 
+            const date = today.getDate();
+            const weekdays = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+            const dayOfWeek = weekdays[today.getDay()];
+            return ` (${month}/${date} ${dayOfWeek})`;
+        }
+
+        /* 1. 當日動態 (自動帶入日期) */
         function fetchShopTab(tabName, folderNum) {
             closeModal('shopMenuModal'); 
             githubFolderNumber = folderNum; 
-            document.getElementById('dynamicShopTitle').innerText = tabName; 
+            
+            const dateSuffix = getFormattedToday();
+            document.getElementById('dynamicShopTitle').innerText = tabName + dateSuffix; 
             
             const imgArea = document.getElementById('dynamicImageArea');
             imgArea.innerHTML = "";
@@ -362,7 +374,7 @@
             }
         }
 
-        /* 2. 本週報班 (同步使用不裁切多排網格) */
+        /* 2. 本週報班 */
         function fetchWeeklyPhotos(tabName, folderName) {
             closeModal('weeklyScheduleMenuModal');
             document.getElementById('dynamicShopTitle').innerText = tabName + " ｜ 本週報班動態";
@@ -407,6 +419,15 @@
             if (event.target.classList.contains('modal')) { 
                 event.target.style.display = "none"; 
             } 
+        }
+
+        /* PWA Service Worker 核心註冊 */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('PWA Service Worker 註冊成功', reg.scope))
+                    .catch(err => console.log('PWA Service Worker 註冊失敗', err));
+            });
         }
     </script>
 </body>
