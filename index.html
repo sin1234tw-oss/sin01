@@ -92,7 +92,7 @@
                 <div class="sub-menu-btn" onclick="fetchShopTab('4館-芯苑', '4')">4館-芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('5館-潘朵拉', '5')">5館-潘朵拉</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('6館-手中情', '6')">6館-手中情</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7館-樂鑽</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7鑽-樂鑽</div>
             </div>
         </div>
     </div>
@@ -147,11 +147,11 @@
                     scheduleContainer.textContent = "今日暫無文字班表更新。";
                 }
 
-                // 🚀 自動狂抓 1 到 150 張照片，沒照片的就背景刪除（不破圖）
+                // 修正後的核心：精準對齊真正的儲存庫 sin01 狂抓照片
                 const maxPhotos = 150; 
                 for (let i = 1; i <= maxPhotos; i++) {
                     const img = document.createElement('img');
-                    img.src = `https://raw.githubusercontent.com/sin1234tw-oss/1/main/${githubFolderNumber}/${i}.jpg`;
+                    img.src = `https://raw.githubusercontent.com/sin1234tw-oss/sin01/main/${githubFolderNumber}/${i}.jpg`;
                     img.className = 'schedule-image';
                     img.loading = 'lazy';
                     img.onerror = function() { this.remove(); };
