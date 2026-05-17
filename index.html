@@ -11,14 +11,69 @@
         .menu-btn { background: linear-gradient(180deg, #181818 0%, #0d0d0d 100%); border: 1px solid #222; border-radius: 12px; padding: 22px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border-left: 5px solid #ffd700; }
         .btn-text { color: #ffffff; font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; }
         .btn-arrow { color: #ffd700; font-size: 1rem; }
+        
+        /* 基礎彈窗樣式 */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); z-index: 1000; }
         .modal-content { background: linear-gradient(135deg, #141414 0%, #050505 100%); border: 2px solid #ffd700; margin: 5vh auto; padding: 25px 20px; width: 90%; max-width: 420px; max-height: 85vh; overflow-y: auto; border-radius: 16px; position: relative; color: #f5ecc2; text-align: left; }
-        .close-btn { position: absolute; top: 12px; right: 20px; color: #ffd700; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-btn { position: absolute; top: 12px; right: 20px; color: #ffd700; font-size: 28px; font-weight: bold; cursor: pointer; z-index: 1001; }
+        
         .sub-menu-container { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
         .sub-menu-btn { background: #222; border: 1px solid #d4af37; color: #fff; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; text-align: center; cursor: pointer; }
         .schedule-text { white-space: pre-wrap; word-break: break-all; background: #111; padding: 15px; border-radius: 8px; border-left: 3px solid #ffd700; font-size: 1.1rem; line-height: 1.6; color: #ffffff; margin-bottom: 15px; }
-        .schedule-image-container { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
-        .schedule-image { width: 100%; max-height: 450px; object-fit: contain; border-radius: 8px; border: 2px solid #D4AF37; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.6); }
+        
+        /* 核心修改：智慧型多排網格 (手機3排，大螢幕4排) */
+        .schedule-image-container { 
+            width: 100%; 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* 預設手機版 3 排 */
+            gap: 8px;                             /* 照片間距稍微縮小，更精緻 */
+            margin-top: 15px; 
+        }
+        @media (min-width: 768px) {
+            .schedule-image-container {
+                grid-template-columns: repeat(4, 1fr); /* 電腦或平板自動變 4 排 */
+            }
+        }
+        
+        .schedule-image { 
+            width: 100%; 
+            height: 150px;          /* 稍微縮短高度，正方形感更好看 */
+            object-fit: cover;      /* 自動裁切不縮水變形 */
+            border-radius: 6px;     /* 微圓角 */
+            border: 1px solid #D4AF37; 
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15); 
+            cursor: pointer;
+            transition: transform 0.2s; /* 滑過去的放大微動態 */
+        }
+        .schedule-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* 核心修改：專用照片燈箱（大彈窗） */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000; /* 層級最高，壓在所有東西上面 */
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            animation: zoomIn 0.2s ease-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         .content-wrapper { display: flex; flex-direction: column; gap: 10px; }
         .price-time-section { background: rgba(255, 215, 0, 0.03); border: 1px solid rgba(255, 215, 0, 0.15); padding: 12px; border-radius: 8px; }
         .highlight-gold { color: #ffd700; font-weight: bold; font-size: 1.1rem; display: inline-block; }
@@ -92,7 +147,7 @@
                 <div class="sub-menu-btn" onclick="fetchShopTab('4館-芯苑', '4')">4館-芯苑</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('5館-潘朵拉', '5')">5館-潘朵拉</div>
                 <div class="sub-menu-btn" onclick="fetchShopTab('6館-手中情', '6')">6館-手中情</div>
-                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7鑽-樂鑽</div>
+                <div class="sub-menu-btn" onclick="fetchShopTab('7館-樂鑽', '7')">7館-樂鑽</div>
             </div>
         </div>
     </div>
@@ -106,12 +161,25 @@
         </div>
     </div>
 
+    <div id="photoLightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="放大照片">
+    </div>
+
     <script>
         const SPREADSHEET_ID = '1i0yb8gEWBHBJaY6KGtc_NasIC6oe5XUBx9wwoO3_MiM'; 
         let githubFolderNumber = '1'; 
 
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        /* 放大照片的控制功能 */
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('photoLightbox').style.display = "flex";
+        }
+        function closeLightbox() {
+            document.getElementById('photoLightbox').style.display = "none";
+        }
 
         function fetchShopTab(tabName, folderNum) {
             closeModal('shopMenuModal'); 
@@ -147,13 +215,16 @@
                     scheduleContainer.textContent = "今日暫無文字班表更新。";
                 }
 
-                // 修正後的核心：精準對齊真正的儲存庫 sin01 狂抓照片
                 const maxPhotos = 150; 
                 for (let i = 1; i <= maxPhotos; i++) {
+                    const imgUrl = `https://raw.githubusercontent.com/sin1234tw-oss/sin01/main/${githubFolderNumber}/${i}.jpg`;
                     const img = document.createElement('img');
-                    img.src = `https://raw.githubusercontent.com/sin1234tw-oss/sin01/main/${githubFolderNumber}/${i}.jpg`;
+                    img.src = imgUrl;
                     img.className = 'schedule-image';
                     img.loading = 'lazy';
+                    
+                    /* 綁定點擊事件：點了就呼叫放大功能 */
+                    img.onclick = function() { openLightbox(imgUrl); };
                     img.onerror = function() { this.remove(); };
                     imgArea.appendChild(img);
                 }
@@ -163,7 +234,12 @@
             }
         }
 
-        window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
+        /* 點選空白處關閉選單 */
+        window.onclick = function(event) { 
+            if (event.target.classList.contains('modal')) { 
+                event.target.style.display = "none"; 
+            } 
+        }
     </script>
 </body>
 </html>
